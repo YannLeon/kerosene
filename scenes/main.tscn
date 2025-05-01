@@ -16,7 +16,7 @@ script = ExtResource("1_jyhfs")
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
 position = Vector2(-3, -14)
 motion_scale = Vector2(0.2, 0.2)
-motion_mirroring = Vector2(3600, 0)
+motion_mirroring = Vector2(2160, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
 texture_repeat = 2
