@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://beqlo31ekacqq"]
+[gd_scene load_steps=8 format=3 uid="uid://beqlo31ekacqq"]
 
 [ext_resource type="Texture2D" uid="uid://dwn06sgikss5b" path="res://assets/environnment/sky.png" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://jwn73cel5sbo" path="res://scenes/main.gd" id="1_jyhfs"]
 [ext_resource type="Texture2D" uid="uid://de375hd6bq5or" path="res://assets/environnment/road.png" id="2_sugp2"]
 [ext_resource type="PackedScene" uid="uid://duika4wlt4am0" path="res://scenes/player.tscn" id="3_sugp2"]
 [ext_resource type="Script" uid="uid://bxr1d26dfxws7" path="res://scenes/death_zone.gd" id="4_tbgi4"]
+[ext_resource type="AudioStream" uid="uid://c8pt1oeemc1rn" path="res://assets/Kérosène_loop.mp3" id="6_tefeu"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_tbgi4"]
 
@@ -52,5 +53,10 @@ script = ExtResource("4_tbgi4")
 unique_name_in_owner = true
 position = Vector2(4, 547)
 shape = SubResource("WorldBoundaryShape2D_tbgi4")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_tefeu")
+autoplay = true
+parameters/looping = true
 
 [connection signal="body_entered" from="DeathZone" to="." method="_on_death_zone_body_entered"]
