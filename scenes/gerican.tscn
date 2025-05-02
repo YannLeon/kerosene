@@ -1,0 +1,108 @@
+[gd_scene load_steps=15 format=3 uid="uid://cqgohl4jhsgrk"]
+
+[ext_resource type="Texture2D" uid="uid://82spwwwrf2bl" path="res://assets/entities/gerican/image0000.png" id="1_brukk"]
+[ext_resource type="Script" uid="uid://dftaotnxvpdmm" path="res://scenes/gerican.gd" id="1_rx0hm"]
+[ext_resource type="Texture2D" uid="uid://b6yxo0d1dp6e7" path="res://assets/entities/gerican/image0001.png" id="2_rx0hm"]
+[ext_resource type="Texture2D" uid="uid://dy6hxcbx40paa" path="res://assets/entities/gerican/image0002.png" id="3_2mncu"]
+[ext_resource type="Texture2D" uid="uid://xed1sdhoa035" path="res://assets/entities/gerican/image0003.png" id="4_edpo4"]
+[ext_resource type="Texture2D" uid="uid://bjn53sc8q6858" path="res://assets/entities/gerican/image0004.png" id="5_65a2p"]
+[ext_resource type="Texture2D" uid="uid://byv5oejk0hqan" path="res://assets/entities/gerican/image0005.png" id="6_clj73"]
+[ext_resource type="Texture2D" uid="uid://uij38huuj2qh" path="res://assets/entities/gerican/image0006.png" id="7_gpf38"]
+[ext_resource type="Texture2D" uid="uid://d2ej5u3463id2" path="res://assets/entities/gerican/image0007.png" id="8_u60tt"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_plhpo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_brukk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_rx0hm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2mncu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_edpo4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_65a2p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_clj73")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_gpf38")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_u60tt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w8umi"]
+size = Vector2(290, 365)
+
+[sub_resource type="Animation" id="Animation_2mncu"]
+resource_name = "collect"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.466667),
+"transitions": PackedFloat32Array(1, 1.27456, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_edpo4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_65a2p"]
+_data = {
+&"RESET": SubResource("Animation_edpo4"),
+&"collect": SubResource("Animation_2mncu")
+}
+
+[node name="Gerican" type="Node2D"]
+script = ExtResource("1_rx0hm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_plhpo")
+autoplay = "default"
+frame_progress = 0.484471
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-17, 37.5)
+shape = SubResource("RectangleShape2D_w8umi")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_65a2p")
+}
+
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]

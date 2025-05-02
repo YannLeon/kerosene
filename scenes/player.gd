@@ -10,7 +10,7 @@ const MAX_ROTATION_DOWN = 30.0
 const ROTATION_SPEED = 6.0
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_pressed("ui_accept"):
+	if Input.is_action_pressed("ui_accept") and FuelStore.fuelAmount>0:
 		velocity.y += UP_ACCELERATION * delta
 	else:
 		velocity.y += GRAVITY * delta
