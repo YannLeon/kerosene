@@ -88,4 +88,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
+[node name="FuelSpawnTimer" type="Timer" parent="."]
+autostart = true
+
 [connection signal="body_entered" from="DeathZone" to="." method="_on_death_zone_body_entered"]
