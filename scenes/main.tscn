@@ -74,7 +74,6 @@ layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/MarginContainer"]
 layout_mode = 2
-alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
@@ -87,6 +86,14 @@ custom_minimum_size = Vector2(400, 20)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+
+[node name="MeterScore" type="Label" parent="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "0 m"
 
 [node name="FuelSpawnTimer" type="Timer" parent="."]
 autostart = true

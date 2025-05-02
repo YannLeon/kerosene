@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var fuel_bar: ProgressBar = $CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer/FuelBar
 @onready var spawn_timer: Timer = $FuelSpawnTimer
+@onready var meter_score: Label = $CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/MeterScore
 
 var speed: float = 200.0
 var player: Node2D
@@ -22,8 +23,12 @@ func _process(delta: float) -> void:
 	var movement = Vector2(speed * delta, 0)
 	player.position += movement
 	camera.position += movement
-	FuelStore.add_fuel(-5  *delta)
+	FuelStore.add_fuel(-5 * delta)
 	fuel_bar.value = FuelStore.fuelAmount
+
+	# Update the meter label
+	var meters:int = round(player.position.x/100)
+	meter_score.text = str(meters) + " m"
 
 func _on_death_zone_body_entered(body: Node2D) -> void:
 	if body == player:
@@ -42,7 +47,7 @@ func _on_spawn_timer_timeout() -> void:
 	var spawn_x = camera_pos.x + screen_size.x + randf_range(50, 200)
 
 	# Y can be anywhere within the vertical screen area
-	var spawn_y = camera_pos.y + randf_range(0, screen_size.y-(600*0.2))
+	var spawn_y = camera_pos.y + randf_range(5, screen_size.y-(600*0.2))
 	
 	
 
