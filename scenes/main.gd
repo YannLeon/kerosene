@@ -47,7 +47,7 @@ func _on_spawn_timer_timeout() -> void:
 	var spawn_x = camera_pos.x + screen_size.x + randf_range(50, 200)
 
 	# Y can be anywhere within the vertical screen area
-	var spawn_y = camera_pos.y + randf_range(5, screen_size.y-(600*0.2))
+	var spawn_y = camera_pos.y + randf_range(15, screen_size.y-(600*0.2))
 	
 	
 
@@ -55,5 +55,5 @@ func _on_spawn_timer_timeout() -> void:
 	add_child(instance)
 
 	# Set a new random time for the next spawn
-	spawn_timer.wait_time = randf_range(3.0, 8.0)
+	spawn_timer.wait_time = randf_range(4.0, 9.0)
 	spawn_timer.start()
