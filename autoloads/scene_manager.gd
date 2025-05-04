@@ -1,6 +1,7 @@
 extends Node
 
-var main_scene_path := "res://scenes/Main.tscn"
+const LOADING = preload("res://scenes/Loading.tscn")
+const MAIN = preload("res://scenes/main.tscn")
 
 func load_scene(path: String) -> void:
 	get_tree().paused = false
@@ -8,4 +9,10 @@ func load_scene(path: String) -> void:
 
 func restart_main() -> void:
 	FuelStore.add_fuel(100)
-	load_scene(main_scene_path)
+
+	# Load the loading screen first
+	load_scene(LOADING.resource_path)
+
+	# Wait 2 seconds, then load the main scene
+	await get_tree().create_timer(1.0).timeout
+	load_scene(MAIN.resource_path)
