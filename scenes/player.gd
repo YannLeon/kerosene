@@ -39,11 +39,11 @@ func _physics_process(delta: float) -> void:
 		State.BOOSTED:
 			velocity.y += UP_ACCELERATION * delta
 			sprite.play("boosting")
-			if !Input.is_action_pressed("ui_accept") or FuelStore.fuelAmount <= 0:
+			if !Input.is_action_pressed("action") or FuelStore.fuelAmount <= 0:
 				state = State.NORMAL
 
 		State.NORMAL:
-			if Input.is_action_pressed("ui_accept") and FuelStore.fuelAmount > 0:
+			if Input.is_action_pressed("action") and FuelStore.fuelAmount > 0:
 				state = State.BOOSTED
 				return
 			velocity.y += GRAVITY * delta
