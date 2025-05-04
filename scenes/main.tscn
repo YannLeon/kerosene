@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://beqlo31ekacqq"]
+[gd_scene load_steps=13 format=3 uid="uid://beqlo31ekacqq"]
 
 [ext_resource type="Texture2D" uid="uid://dwn06sgikss5b" path="res://assets/environnment/sky.png" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://jwn73cel5sbo" path="res://scenes/main.gd" id="1_jyhfs"]
@@ -7,6 +7,9 @@
 [ext_resource type="Script" uid="uid://bxr1d26dfxws7" path="res://scenes/death_zone.gd" id="4_tbgi4"]
 [ext_resource type="AudioStream" uid="uid://c8pt1oeemc1rn" path="res://assets/Kérosène_loop.mp3" id="6_tefeu"]
 [ext_resource type="Texture2D" uid="uid://bjn53sc8q6858" path="res://assets/entities/gerican/image0004.png" id="7_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://cca001veh6fsc" path="res://scenes/ennemy_spawner.tscn" id="8_85g3d"]
+[ext_resource type="PackedScene" uid="uid://cqgohl4jhsgrk" path="res://scenes/gerican.tscn" id="9_choun"]
+[ext_resource type="PackedScene" uid="uid://bwiwc8ppmg5vb" path="res://scenes/bird.tscn" id="10_choun"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_tbgi4"]
 
@@ -63,43 +66,48 @@ stream = ExtResource("6_tefeu")
 autoplay = true
 parameters/looping = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HUD/VBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/VBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="HUD/VBoxContainer/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 texture = ExtResource("7_o6xl0")
 expand_mode = 2
 
-[node name="FuelBar" type="ProgressBar" parent="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="FuelBar" type="ProgressBar" parent="HUD/VBoxContainer/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(400, 20)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HUD/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 
-[node name="MeterScore" type="Label" parent="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer"]
+[node name="MeterScore" type="Label" parent="HUD/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer"]
 layout_mode = 2
 text = "0 m"
 label_settings = SubResource("LabelSettings_o6xl0")
 
-[node name="FuelSpawnTimer" type="Timer" parent="."]
-autostart = true
+[node name="FuelSpawner" parent="." instance=ExtResource("8_85g3d")]
+enemy_scene = ExtResource("9_choun")
+
+[node name="EnnemySpawner" parent="." instance=ExtResource("8_85g3d")]
+enemy_scene = ExtResource("10_choun")
+min_spawn_time = 3.0
+max_spawn_time = 7.0
 
 [connection signal="body_entered" from="DeathZone" to="." method="_on_death_zone_body_entered"]

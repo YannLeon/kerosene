@@ -19,6 +19,15 @@ var state: State = State.NORMAL
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
+func _ready() -> void:
+	GlobalEvents.ennemyhit.connect(_on_ennemy_hit)
+
+func _on_ennemy_hit(body: Node2D) -> void:
+	if body == self:
+		state = State.CRASHING
+		print("Player is crashing from global event!")
+
+
 func _physics_process(delta: float) -> void:
 	match state:
 		State.CRASHING:
@@ -46,7 +55,3 @@ func _physics_process(delta: float) -> void:
 
 	var target_angle = clamp(velocity.y / MAX_DOWN_SPEED, -1.0, 1.0) * MAX_ROTATION_DOWN
 	rotation_degrees = lerp(rotation_degrees, target_angle, ROTATION_SPEED * delta)
-
-func _on_ennemy_hit(body: Node2D) -> void:
-	state = State.CRASHING
-	print("Player is crashing!")

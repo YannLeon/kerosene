@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 SceneManager="*res://autoloads/scene_manager.gd"
 FuelStore="*res://autoloads/fuel_store.gd"
+GlobalEvents="*res://autoloads/global_events.gd"
 
 [global_group]
 

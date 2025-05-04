@@ -7,4 +7,5 @@ func load_scene(path: String) -> void:
 	get_tree().change_scene_to_file(path)
 
 func restart_main() -> void:
+	FuelStore.add_fuel(100)
 	load_scene(main_scene_path)
