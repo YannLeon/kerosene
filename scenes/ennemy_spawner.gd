@@ -4,6 +4,7 @@ extends Node2D
 @export var min_spawn_time: float = 4.0
 @export var max_spawn_time: float = 9.0
 @export var vertical_margin: float = 15.0
+var spawn_rate_scale := 1.0
 
 @onready var spawn_timer: Timer = $SpawnTimer
 var camera: Camera2D
@@ -32,7 +33,11 @@ func _on_spawn_timer_timeout() -> void:
 
 	_set_random_spawn_time()
 
+func set_spawn_rate_scale(scale: float) -> void:
+	spawn_rate_scale = clamp(scale, 0.5, 3.0)  # Prevent too fast or slow
+
 func _set_random_spawn_time():
-	spawn_timer.wait_time = randf_range(min_spawn_time, max_spawn_time)
-	print(spawn_timer.wait_time)
+	var scaled_min = min_spawn_time / spawn_rate_scale
+	var scaled_max = max_spawn_time / spawn_rate_scale
+	spawn_timer.wait_time = randf_range(scaled_min, scaled_max)
 	spawn_timer.start()

@@ -106,8 +106,9 @@ label_settings = SubResource("LabelSettings_o6xl0")
 enemy_scene = ExtResource("9_choun")
 
 [node name="EnnemySpawner" parent="." instance=ExtResource("8_85g3d")]
+unique_name_in_owner = true
 enemy_scene = ExtResource("10_choun")
-min_spawn_time = 3.0
-max_spawn_time = 7.0
+min_spawn_time = 2.0
+max_spawn_time = 6.0
 
 [connection signal="body_entered" from="DeathZone" to="." method="_on_death_zone_body_entered"]
