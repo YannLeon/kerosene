@@ -11,9 +11,11 @@ config_version=5
 [application]
 
 config/name="Kerosene"
+config/version="1.0.0"
 run/main_scene="uid://beqlo31ekacqq"
 config/features=PackedStringArray("4.4", "GL Compatibility")
-config/icon="res://icon.svg"
+boot_splash/image="uid://82spwwwrf2bl"
+config/icon="uid://rlkfp8fdv2sl"
 
 [autoload]
 
