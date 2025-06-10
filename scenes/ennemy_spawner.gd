@@ -9,13 +9,15 @@ var spawn_rate_scale := 1.0
 @onready var spawn_timer: Timer = $SpawnTimer
 var camera: Camera2D
 
+func start() -> void:
+	_set_random_spawn_time()
+
 func _ready() -> void:
-	randomize()	# Automatically find the Camera2D in the scene
-	camera = get_tree().get_root().get_node("Main/Camera2D") # Adjust path as needed
+	randomize()
+	camera = get_tree().get_root().get_node("Main/Camera2D") # Adjust path if needed
 	if !camera:
 		push_warning("Camera2D not found. Make sure the path is correct.")
 	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
-	_set_random_spawn_time()
 
 func _on_spawn_timer_timeout() -> void: 
 	if !is_instance_valid(camera):

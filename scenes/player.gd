@@ -9,6 +9,10 @@ const MAX_ROTATION_UP = -30.0
 const MAX_ROTATION_DOWN = 30.0
 const ROTATION_SPEED = 6.0
 
+var game_started: bool = false
+var original_y: float
+var float_time := 0.0
+
 enum State {
 	NORMAL,
 	BOOSTED,
@@ -21,14 +25,22 @@ var state: State = State.NORMAL
 
 func _ready() -> void:
 	GlobalEvents.ennemyhit.connect(_on_ennemy_hit)
+	original_y = position.y
+
 
 func _on_ennemy_hit(body: Node2D) -> void:
-	if body == self:
+	if body == self && game_started:
 		state = State.CRASHING
 		print("Player is crashing from global event!")
 
 
 func _physics_process(delta: float) -> void:
+	if not game_started:
+		float_time += delta
+		velocity = Vector2.ZERO  # Stop any inherited motion
+		position.y = original_y + sin(float_time * 2.0) * 10.0  # Float gently
+		return  # Skip gravity/movement logic
+
 	match state:
 		State.CRASHING:
 			velocity.y += GRAVITY * delta

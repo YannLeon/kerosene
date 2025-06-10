@@ -14,7 +14,8 @@ config/name="Kerosene"
 config/version="1.0.0"
 run/main_scene="uid://beqlo31ekacqq"
 config/features=PackedStringArray("4.4", "GL Compatibility")
-boot_splash/image="uid://82spwwwrf2bl"
+boot_splash/fullsize=false
+boot_splash/image="uid://cvav7igmcviqg"
 config/icon="uid://rlkfp8fdv2sl"
 
 [autoload]

@@ -6,4 +6,3 @@
 script = ExtResource("1_kuoj2")
 
 [node name="SpawnTimer" type="Timer" parent="."]
-autostart = true
