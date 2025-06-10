@@ -5,9 +5,9 @@ extends Node2D
 @onready var player: Node2D = $Player
 @onready var camera: Camera2D = $Camera2D
 @onready var ennemy_spawner: Node2D = %EnnemySpawner
-@onready var press_to_play_label: Label = $HUD/PressToPlay  # Add this in the scene
 @onready var fuel_spawner: Node2D = %FuelSpawner
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var press_to_play_label: Label = %PressToPlay
 
 var speed: float = 200.0
 const party_acceleration: float = 2.0

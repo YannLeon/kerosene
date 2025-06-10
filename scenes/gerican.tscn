@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cqgohl4jhsgrk"]
+[gd_scene load_steps=16 format=3 uid="uid://cqgohl4jhsgrk"]
 
 [ext_resource type="Texture2D" uid="uid://82spwwwrf2bl" path="res://assets/entities/gerican/image0000.png" id="1_brukk"]
 [ext_resource type="Script" uid="uid://dftaotnxvpdmm" path="res://scenes/gerican.gd" id="1_rx0hm"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://byv5oejk0hqan" path="res://assets/entities/gerican/image0005.png" id="6_clj73"]
 [ext_resource type="Texture2D" uid="uid://uij38huuj2qh" path="res://assets/entities/gerican/image0006.png" id="7_gpf38"]
 [ext_resource type="Texture2D" uid="uid://d2ej5u3463id2" path="res://assets/entities/gerican/image0007.png" id="8_u60tt"]
+[ext_resource type="AudioStream" uid="uid://j6r40aampjxl" path="res://assets/water_sfx.mp3" id="10_2mncu"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_plhpo"]
 animations = [{
@@ -105,5 +106,9 @@ shape = SubResource("RectangleShape2D_w8umi")
 libraries = {
 &"": SubResource("AnimationLibrary_65a2p")
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_2mncu")
+volume_db = 3.0
 
 [connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]

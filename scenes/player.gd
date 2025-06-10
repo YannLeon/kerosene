@@ -22,6 +22,8 @@ enum State {
 var state: State = State.NORMAL
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var smoke_trail: GPUParticles2D = $SmokeTrail
 
 func _ready() -> void:
 	GlobalEvents.ennemyhit.connect(_on_ennemy_hit)
@@ -30,7 +32,9 @@ func _ready() -> void:
 
 func _on_ennemy_hit(body: Node2D) -> void:
 	if body == self && game_started:
+		smoke_trail.emitting = true
 		state = State.CRASHING
+		audio_stream_player.play()
 		print("Player is crashing from global event!")
 
 

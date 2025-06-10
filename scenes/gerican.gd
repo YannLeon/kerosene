@@ -1,5 +1,6 @@
 extends Node2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 var collected: bool = false
 
@@ -14,6 +15,7 @@ func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_inde
 		return
 	collected = true
 	animation_player.play("collect")
+	audio_stream_player.play()
 	FuelStore.add_fuel(50)
 
 func _on_animation_finished(anim_name: String) -> void:
