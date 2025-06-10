@@ -1,11 +1,65 @@
-[gd_scene load_steps=2 format=3 uid="uid://dqcpwjv30e0gr"]
+[gd_scene load_steps=8 format=3 uid="uid://dqcpwjv30e0gr"]
 
 [ext_resource type="Script" uid="uid://dmcbdrynvh45g" path="res://scenes/death_screen.gd" id="1_biyii"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_biyii"]
+font_size = 38
+
+[sub_resource type="LabelSettings" id="LabelSettings_0r1s6"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_5034k"]
+font_size = 64
+outline_size = 2
+
+[sub_resource type="Animation" id="Animation_biyii"]
+resource_name = "fade in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_5034k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0r1s6"]
+_data = {
+&"RESET": SubResource("Animation_5034k"),
+&"fade in": SubResource("Animation_biyii")
+}
 
 [node name="DeathScreen" type="CanvasLayer"]
 process_mode = 3
 layer = 3
 script = ExtResource("1_biyii")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.180392, 0.133333, 0.184314, 0.643137)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchors_preset = 13
@@ -16,16 +70,40 @@ offset_left = -46.0
 offset_right = 46.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 10
 alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "GAME OVER"
+label_settings = SubResource("LabelSettings_biyii")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "SCORE : "
+label_settings = SubResource("LabelSettings_0r1s6")
+horizontal_alignment = 1
+
+[node name="score" type="Label" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "null"
+label_settings = SubResource("LabelSettings_5034k")
 horizontal_alignment = 1
 
 [node name="RetryButton" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 text = "Retry"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_0r1s6")
+}
+autoplay = "fade in"
 
 [connection signal="pressed" from="VBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]

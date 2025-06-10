@@ -23,6 +23,7 @@ config/icon="uid://rlkfp8fdv2sl"
 SceneManager="*res://autoloads/scene_manager.gd"
 FuelStore="*res://autoloads/fuel_store.gd"
 GlobalEvents="*res://autoloads/global_events.gd"
+GlobalState="*res://autoloads/global_state.gd"
 
 [display]
 

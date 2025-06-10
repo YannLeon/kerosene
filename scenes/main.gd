@@ -55,4 +55,7 @@ func _on_death_zone_body_entered(body: Node2D) -> void:
 	if body == player:
 		get_tree().paused = true
 		var death_scene = preload("res://scenes/DeathScreen.tscn").instantiate()
+		GlobalState.final_score = meter_score.text
+		meter_score.visible = false
 		add_child(death_scene)
+		
